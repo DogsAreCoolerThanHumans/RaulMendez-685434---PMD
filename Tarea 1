@@ -9,14 +9,14 @@ typedef struct Profesor
 
 typedef struct Profesor profesor; //sinónimo
 
-void readArray (profesor * arr, int n) //habría de recibir apuntador a sctruct tipo prof 
+void readArray (profesor * arr[], int n) //habría de recibir apuntador a sctruct tipo prof 
 {
   for (int i=0; i<n; i++)
     {
       //scanf ("%s %lf", arr[i]->nombre, &arr[i]->calificacion);
       //gets(arr[i].nombre);
-      scanf("%s", arr[i].nombre);
-      scanf ("%lf", arr[i].calificacion);
+      scanf("%s", &arr[i]->nombre);
+      scanf ("%f", &arr[i].calificacion);
     }
 };
 
@@ -38,9 +38,15 @@ scanf("%d", &n1);
   //readArray(arr2, n2);	//leer el segundo arreglo 
 
   //printArray (___________);	//Imprimir el resultado final
-
+ for(int i=0; i<n1; i++)
+ {
+     printf("%s\t", arr1[i].nombre);
+     printf("%f\t", arr1[i].calificacion);
+ }
   return 0;
 }
+
+
 
 
 
