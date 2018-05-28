@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct Profesor
+{
+  char nombre[15];
+  float calificacion;
+};
+
+typedef struct Profesor profesor; //sinónimo
+
+void readArray (profesor * arr, int n) //habría de recibir apuntador a sctruct tipo prof 
+{
+  for (int i=0; i<n; i++)
+    {
+      //scanf ("%s %lf", arr[i]->nombre, &arr[i]->calificacion);
+      gets(arr[i].nombre);
+      scanf ("%lf", arr[i]->calificacion);
+    }
+};
+
+//void printArray (Profesor ____, int _____);
+
+
+void main ()
+{
+  profesor arr1[20];		//Primer arreglo (de estructuras tipo Prof)
+  profesor arr2[20];		//Segundo arreglo
+  profesor arrF[40];		//Arreglo final, con elementos fusionados y ordenados
+  int n1, n2;			//Longitud de los arreglos
+
+
+scanf("%d", &n1);
+  readArray(arr1, n1);	//leer el primer arreglo
+  
+//scanf("%d", &n2); 
+  //readArray(arr2, n2);	//leer el segundo arreglo 
+
+  //printArray (___________);	//Imprimir el resultado final
+
+  return 0;
+}
