@@ -14,8 +14,9 @@ void readArray (profesor * arr, int n) //habría de recibir apuntador a sctruct 
   for (int i=0; i<n; i++)
     {
       //scanf ("%s %lf", arr[i]->nombre, &arr[i]->calificacion);
-      gets(arr[i].nombre);
-      scanf ("%lf", arr[i]->calificacion);
+      //gets(arr[i].nombre);
+      scanf("%s", arr[i].nombre);
+      scanf ("%lf", arr[i].calificacion);
     }
 };
 
@@ -40,8 +41,6 @@ scanf("%d", &n1);
 
   return 0;
 }
-
-
 
 
 
