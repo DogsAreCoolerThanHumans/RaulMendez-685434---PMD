@@ -1,0 +1,32 @@
+
+#include <stdio.h>
+#include <math.h>
+
+struct vec2
+{ 
+    int x, y;
+};
+typedef struct vec2 vec;
+
+vec * unitario(vec * v)
+{
+  float root = sqrt(((v->x)*(v->x))+((v->y)*(v->y)));
+  v->x = (v->x)/root;
+  v->y = (v->y)/root;
+  
+  return v;
+};
+
+
+
+
+int main()
+{
+    vec v;
+    scanf("%d %d", &v.x, &v.y);
+    unitario(&v);
+    
+    printf
+
+    return 0;
+}
