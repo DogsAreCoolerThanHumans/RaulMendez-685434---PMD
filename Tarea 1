@@ -9,18 +9,32 @@ typedef struct Profesor
 
 typedef struct Profesor profesor; //sinónimo
 
-void readArray (profesor * arr[], int n) //habría de recibir apuntador a sctruct tipo prof 
+void readArray (profesor arr[], int n) //habría de recibir apuntador a sctruct tipo prof 
 {
+    profesor * parr = arr; 
   for (int i=0; i<n; i++)
     {
       //scanf ("%s %lf", arr[i]->nombre, &arr[i]->calificacion);
       //gets(arr[i].nombre);
-      scanf("%s", &arr[i]->nombre);
-      scanf ("%f", &arr[i].calificacion);
+      scanf("%s", (parr+i)->nombre); //
+      scanf ("%f", &(parr+i)->calificacion); //&parr[i].calificacion tmb funciona!
     }
 };
 
-//void printArray (Profesor ____, int _____);
+/*
+void mergeArrays (Profesor _____, int _____, Profesor ____, int _____,
+		  Profesor _____, int ____);
+void sortArray (Profesor _____, int ____);
+*/
+
+void printArray (profesor arr[], int n)
+{
+     for(int i=0; i<n; i++)
+     {
+     printf("%s\t", arr[i].nombre);
+     printf("%1f\t", arr[i].calificacion);
+     }
+};
 
 
 void main ()
@@ -30,27 +44,57 @@ void main ()
   profesor arrF[40];		//Arreglo final, con elementos fusionados y ordenados
   int n1, n2;			//Longitud de los arreglos
 
-
 scanf("%d", &n1);
   readArray(arr1, n1);	//leer el primer arreglo
+scanf("%d", &n2);                                  //falla aquí
+  readArray (arr2, n2);	//leer el segundo arreglo 
   
-//scanf("%d", &n2); 
-  //readArray(arr2, n2);	//leer el segundo arreglo 
+  //mergeArrays (_______________________________);	//Fusionar los dos arreglos en un tercer arreglo
 
-  //printArray (___________);	//Imprimir el resultado final
- for(int i=0; i<n1; i++)
- {
-     printf("%s\t", arr1[i].nombre);
-     printf("%f\t", arr1[i].calificacion);
- }
+  //sortArray (_____________);	//Ordenar los elementos del tercer arreglo, recuerde que pueden 
+  //existir profesores repetidos
+
+printArray(arr1, n1); //Imprimir el resultado final (arrF!)
+
+
+
+
   return 0;
 }
 
+/*
 
+profesor p;
+profesor * ap = p; 
+ap->calificacion=7;
+scanf("%f", &ap->calificacion); //& porque es variable, no lleva si fuese array
 
+int v[]={1,2,3,4};
+int *p=v; //no lleva & porque nombre del array representa dirección inicial 
+*p++:
+*p=*p+1;
 
+p++
 
---------------------------------------------
+//---------------------------------------
+typedef struct{
+    char nomb[20]; //sin &
+    int c;
+}p;
+
+p personas[5];
+
+p * ap=personas; //sin & porque array es dirección
+
+//acceder:
+ap->c=7; 
+scanf("%s", ap->nomb); //no & por array (string)  //%s -> %[^\n]
+(*ap).nom;
+scanf("%s", &ap->c);
+&(*ap).c;
+*/
+
+original --------------------------------------------
 
 #include <stdio.h>
 
