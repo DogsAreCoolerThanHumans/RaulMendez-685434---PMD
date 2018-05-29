@@ -1,0 +1,40 @@
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct{ //struct como manera eficiente de pasar múltiples parámetros
+    int x, y;
+}param;
+
+DWORD WINAPI funcionInicial(void *);
+
+int main()
+{
+    param datos={1,2};
+    HANDLE h;
+    h=CreateThread(NULL, 0, funcionInicial, (void *)&datos, 0, NULL);    
+    
+    
+    /*
+    h=CreateThread(
+        NULL, //Seguridad por default
+        0, //Tamaño de stack por default
+        funcionInicial, //Función que se ejecuta al crear el hilo
+        (void *)&datos, //Parámetros de entrada para la función de arranque
+        0, //Se ejecuta de manera inmediata la función
+        NULL //En este caso no me interesa el identificador 
+        );
+    */
+    printf("Fin del flujo principal...\n");
+    
+    return 0;
+}
+
+DWORD WINAPI funcionInicial(void *p){
+    //imprimir parámetros de entrada
+    param *d=(param *)p; //cast es conversor de tipo
+    printf("X = %d,Y = %d \n", d->x, d->y);
+    printf("Fin del hilo...\n");   
+    return 0;
+    
+}
