@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct Profesor
@@ -12,21 +13,28 @@ typedef struct Profesor profesor; //sinónimo
 //Prototipos:
 void readArray (profesor arr[], int n) 
 {
-    profesor * parr = arr; 
+  profesor * parr = arr; 
   for (int i=0; i<n; i++)
     {
-      //scanf ("%s %lf", arr[i]->nombre, &arr[i]->calificacion);
-      //gets(arr[i].nombre);
-      scanf("%s", (parr+i)->nombre); //
-      scanf ("%f", &(parr+i)->calificacion); //&parr[i].calificacion tmb funciona!
+      scanf("%s", (parr+i)->nombre);
+      scanf ("%f", &(parr+i)->calificacion);
     }
 };
 
-/*
-void mergeArrays (Profesor _____, int _____, Profesor ____, int _____,
-		  Profesor _____, int ____);
-*/
-void sortArray (profesor parr[], int n) // ordena arrF (que contiene salida del merge)
+void mergeArrays(profesor arr1[], int n1, profesor arr2[], int n2, profesor arrF[])
+{
+    for(int i=0; i<n1; i++)
+    {
+        arrF[i] = arr1[i];
+    }
+    
+    for(int k=0; k<n2; k++)
+    {
+        arrF[k+n1] = arr2[k];
+    }
+}
+
+void sortArray (profesor parr[], int n) // ordena arrF (salida de merge)
 {
     profesor * arr = parr;
     profesor aux; 
@@ -58,36 +66,33 @@ void printArray (profesor arr[], int n)
      }
 };
 
-
 void main ()
 {
-  profesor arr1[20];		//Primer arreglo (de estructuras tipo Prof)
+  profesor arr1[20];		//Primer arreglo (de estructuras tipo prof)
   profesor arr2[20];		//Segundo arreglo
   profesor arrF[40];		//Arreglo final, con elementos fusionados y ordenados
-  int n1, n2;			//Longitud de los arreglos
+  int n1, n2;           	//Longitud de los arreglos
 
 scanf("%d", &n1);
-  readArray(arr1, n1);	//leer el primer arreglo
-//scanf("%d", &n2);                                  //falla aquí
-  //readArray (arr2, n2);	//leer el segundo arreglo 
+    readArray(arr1, n1);	//leer el primer arreglo
+scanf("%d", &n2);
+    readArray (arr2, n2);	//leer el segundo arreglo 
   
-  //mergeArrays (_______________________________);	//Fusionar los dos arreglos en un tercer arreglo - arrF
-
-  //sortArray (_____________);	//Ordenar los elementos del tercer arreglo arrF, recuerde que pueden 
-  //existir profesores repetidos (!)
+  int nF=n1+n2; //longitud final
   
-  sortArray(arr1, n1); //extra!----
+mergeArrays(arr1, n1, arr2, n2, arrF); //Fusionar los dos arreglos en un tercer arreglo - arrF
 
-printArray(arr1, n1); //Imprimir el resultado final (arrF!)
+sortArray(arrF, nF);	//Ordenar los elementos del tercer arreglo arrF, recuerde que pueden 
+  //existir profesores repetidos
 
-
-
+printArray(arrF, nF); //Imprimir arreglo final (arrF)
 
   return 0;
 }
 
-/*
 
+//---------------------------------------------------------------------------------------------
+/*
 profesor p;
 profesor * ap = p; 
 ap->calificacion=7;
@@ -100,60 +105,3 @@ int *p=v; //no lleva & porque nombre del array representa dirección inicial
 
 p++
 */
-
-original --------------------------------------------
-
-#include <stdio.h>
-
-typedef struct
-{
-  char nombre[15];
-  float calificacion;
-} Profesor;
-
-float averageArray (Profesor ______, int _____);
-void readArray (Profesor ________, int _____) //habría de recibir apuntador a sctruct tipo prof 
-{
-  for (int i = 0; i < n1; i++) //arr1
-    {
-      scanf ("%s", Profesor[i]->nombre);
-      scanf ("%lf", Profesor[i]->calificación);
-    }
-    
-  for (int i = 0; i < n2; i++) //arr2
-    {
-      scanf ("%s", Profesor[i]->nombre);
-      scanf ("%lf", Profesor[i]->calificación);
-    }
-
-
-};
-
-void mergeArrays (Profesor _____, int _____, Profesor ____, int _____,
-		  Profesor _____, int ____);
-void sortArray (Profesor _____, int ____);
-void printArray (Profesor ____, int _____);
-
-
-void
-main ()
-{
-  Profesor arr1[20];		//Primer arreglo (de estructuras tipo Prof)
-  Profesor arr2[20];		//Segundo arreglo
-  Profesor arrF[40];		//Arreglo final, con elementos fusionados y ordenados
-  int n1, n2;			//Longitud de los arreglos
-
-
-scanf("%d", n1);
-  readArray (______________);	//leer el primer arreglo
-scanf("%d", n2); 
-  readArray (______________);	//leer el segundo arreglo 
-  mergeArrays (_______________________________);	//Fusionar los dos arreglos en un tercer arreglo
-
-  sortArray (_____________);	//Ordenar los elementos del tercer arreglo, recuerde que pueden 
-  //existir profesores repetidos
-
-  printArray (___________);	//Imprimir el resultado final
-
-  return 0;
-}
