@@ -9,7 +9,8 @@ typedef struct Profesor
 
 typedef struct Profesor profesor; //sinónimo
 
-void readArray (profesor arr[], int n) //habría de recibir apuntador a sctruct tipo prof 
+//Prototipos:
+void readArray (profesor arr[], int n) 
 {
     profesor * parr = arr; 
   for (int i=0; i<n; i++)
@@ -24,15 +25,36 @@ void readArray (profesor arr[], int n) //habría de recibir apuntador a sctruct 
 /*
 void mergeArrays (Profesor _____, int _____, Profesor ____, int _____,
 		  Profesor _____, int ____);
-void sortArray (Profesor _____, int ____);
 */
+void sortArray (profesor parr[], int n) // ordena arrF (que contiene salida del merge)
+{
+    profesor * arr = parr;
+    profesor aux; 
+    for(int i=0; i<n; i++)
+    {
+        for(int k=0; k<n-1; k++)
+        {
+            if((arr+k)->calificacion<(arr+k+1)->calificacion)
+            {
+                aux.calificacion=(arr+k)->calificacion;
+                strcpy(aux.nombre, (arr+k)->nombre);
+                
+                (arr+k)->calificacion=(arr+k+1)->calificacion;
+                strcpy((arr+k)->nombre, (arr+k+1)->nombre);
+                
+                (arr+k+1)->calificacion=aux.calificacion;
+                strcpy((arr+k+1)->nombre, aux.nombre);
+            }
+        }
+    }
+};
 
 void printArray (profesor arr[], int n)
 {
      for(int i=0; i<n; i++)
      {
      printf("%s\t", arr[i].nombre);
-     printf("%1f\t", arr[i].calificacion);
+     printf("%.1f\n", arr[i].calificacion);
      }
 };
 
@@ -46,13 +68,15 @@ void main ()
 
 scanf("%d", &n1);
   readArray(arr1, n1);	//leer el primer arreglo
-scanf("%d", &n2);                                  //falla aquí
-  readArray (arr2, n2);	//leer el segundo arreglo 
+//scanf("%d", &n2);                                  //falla aquí
+  //readArray (arr2, n2);	//leer el segundo arreglo 
   
-  //mergeArrays (_______________________________);	//Fusionar los dos arreglos en un tercer arreglo
+  //mergeArrays (_______________________________);	//Fusionar los dos arreglos en un tercer arreglo - arrF
 
-  //sortArray (_____________);	//Ordenar los elementos del tercer arreglo, recuerde que pueden 
-  //existir profesores repetidos
+  //sortArray (_____________);	//Ordenar los elementos del tercer arreglo arrF, recuerde que pueden 
+  //existir profesores repetidos (!)
+  
+  sortArray(arr1, n1); //extra!----
 
 printArray(arr1, n1); //Imprimir el resultado final (arrF!)
 
@@ -75,23 +99,6 @@ int *p=v; //no lleva & porque nombre del array representa dirección inicial
 *p=*p+1;
 
 p++
-
-//---------------------------------------
-typedef struct{
-    char nomb[20]; //sin &
-    int c;
-}p;
-
-p personas[5];
-
-p * ap=personas; //sin & porque array es dirección
-
-//acceder:
-ap->c=7; 
-scanf("%s", ap->nomb); //no & por array (string)  //%s -> %[^\n]
-(*ap).nom;
-scanf("%s", &ap->c);
-&(*ap).c;
 */
 
 original --------------------------------------------
