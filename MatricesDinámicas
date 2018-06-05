@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void inicializarMatriz(double **matriz, int r, int c, int valor) //falta
+{
+    
+}
+
+double** createMatrix(int r, int c)
+{
+    double ** matriz = (double **) malloc(r * sizeof(double *));
+	for(int i=0; i<r; i++)
+		matriz[i] = (double *) malloc(c * sizeof(double));
+}
+
+void printMatrix(double ** m, int r, int c)
+{
+	int i, j;
+	for(i=0; i<r; i++)
+	{
+		for(j=0; j<c; j++)
+			printf("%lf\t", m[i][j]);
+		printf("\n");
+	}
+}
+
+void scanMatrix(double ** m, int r, int c)
+{
+	int i, j;
+	for(i=0; i<r; i++)
+		for(j=0; j<c; j++)
+			scanf("%lf", &m[i][j]);
+}
+
+double ** transMatrix(double ** m, int r, int c)
+{
+	int i, j;
+	double ** tM = (double **) malloc(c * sizeof(double *));
+
+	for(i=0; i<c; i++)
+		tM[i] = (double *) malloc(r * sizeof(double));
+
+	for(i=0; i<c; i++)
+		for(j=0; j<r; j++)
+			tM[i][j] = m[j][i];
+
+	return tM;
+}
+
+//para esto no necesitamos saber cuAntas columnas tiene cada fila
+void freeMatrix(double ** m, int r)
+{
+	int i;
+	for(i=0; i<r; i++)
+		free(m[i]);
+	free(m);
+}
+
+
+int main()
+{
+	double ** matriz;//puntero no inicializado (apunta a basura)
+	int r, c;
+	scanf("%d", &r);
+	scanf("%d", &c);
+
+    createMatrix(r, c);
+
+	scanMatrix(matriz, r, c);
+
+	double ** tM = transMatrix(matriz, r, c);
+
+	printMatrix(matriz, r, c);
+	printf("\n");
+	printMatrix(tM, c, r);
+
+	freeMatrix(matriz, r);
+	freeMatrix(tM, c);
+
+
+    return 0;
+}
