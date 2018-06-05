@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    char *nombre;
+    int edad;
+    float altura, peso;
+}Persona;
+
+Persona * crearPersona(char * nombre, int edad, float peso, float altura)
+{
+    Persona *nuevaPersona;
+    nuevaPersona=(Persona *)malloc(sizeof(Persona));
+    nuevaPersona->nombre=strdup(nombre);
+    nuevaPersona->altura=altura;
+    nuevaPersona->edad=edad;
+    nuevaPersona->peso=peso;
+    return nuevaPersona;
+}
+
+void destruirPersona(Persona *quien) //ir de adentro hacia afuera
+{
+    if(quien!=NULL)
+    {
+        free(quien->nombre);
+        free(quien);
+    }
+}
+
+void imprimirPersona(Persona*quien)
+{
+    printf("Nombre: %s \n", quien->nombre);
+    printf("Edad: %d \n", quien->edad);
+    printf("Peso: %f \n", quien->peso);
+    printf("Altura: %f \n", quien->altura);
+}
+
+void actualizarPersona(Persona *quien, char *nombre, int edad, float peso, float altura);
+
+int main()
+{
+    Persona *p;
+    p=crearPersona("David", 20, 80.1, 1.90);
+    imprimirPersona(p);
+    destruirPersona(p);
+    
+    
+
+
+    return 0;
+}
