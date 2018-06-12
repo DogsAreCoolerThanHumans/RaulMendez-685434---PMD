@@ -1,0 +1,56 @@
+/*
+ ============================================================================
+ Name        : archivos.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct
+{
+	short d, m, a;
+}Fecha;
+
+typedef struct
+{
+	int id_cliente;
+	char nombre[10];
+	Fecha f;
+}Cliente;
+int main(void) {
+
+	FILE * f;
+	f=fopen("archivoBinario.dat", "wb");
+	if(f==NULL)
+		return -1
+			
+	Cliente cliente={1,"Fernando"};
+	fwrite(&cliente, sizeof(Cliente), 1, f);
+	fclose(f);
+	
+	f=fopen("archivoBinario.dat", "rb");
+	if(f==NULL)
+		return -1;
+	Cliente temp;
+	fread(&temp, sizeof(Cliente), 1, f);
+	printf("%d %s \n", temp.id_cliente, temp.nombre);
+	fread(&temp, sizeof(Cliente), 1, f);
+	printf("%d %d \n", temp.id:cliente, temp.nombre);
+	fread(&temp, sizeof(Cliente), 1, f);
+	printf("%d %d \n", temp.id:cliente, temp.nombre);
+	fread(&temp, sizeof(Cliente), 1, f);
+	printf("%d %d \n", temp.id:cliente, temp.nombre);
+	
+/*	int bytes;
+	bytes=fwrite(&cliente, sizeof(Cliente), 1, f);
+	printf("Bytes esfcritos:" %d\n);
+	fclose(f);
+*/
+	
+	return EXIT_SUCCESS;
+}
