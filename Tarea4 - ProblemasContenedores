@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "Stack.h"
+
+bool balancedBrackets(char *exp)
+{
+   Stack s = createStack();
+   char * temp; //cadena temporal
+   int i, j;
+
+   for(i=0; i<sizeof(exp); i++)
+   {
+      if ((exp[i]=="(") || (exp[i]=="["))
+      {
+          push(s, exp[i]);
+      }
+
+      if ((exp[i]==")") || (exp[i]=="]"))
+       {
+           if(s->size==0)
+            return false;
+
+           temp[0]= pop(s); //agregar a temp el caracter previo
+           temp[1]= exp[i]; //agregar a temp el caracter nuevo 
+           if (temp!="()" || temp!="[]") //verificar compatibilidad
+            return false;
+       }
+   }
+
+   if(s->size==0) //de estar vacía la pila, devuelve falso
+    return true
+   else
+    return false
+}
+
+int main()
+{
+
+char * exp = "[(a + b)*3]*(4-5)";	
+balancedBrackets(exp);
+
+    return 0;
+}
